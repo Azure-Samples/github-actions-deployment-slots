@@ -4,9 +4,9 @@ This repo contains a sample Tomcat application and GitHub Actions workflow files
 
 ## Demo Video
 
-The following is a video which demonstrates how the workflows work together for a Pull Request review, merge into main, and release to production.
+The following is a video which demonstrates how the workflows work together for a Pull Request review, merge into main, and release to production. Click the image to open the link to YouTube.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/48Cj63UqTfQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Link to video demo on YouTube](images/youtube-video.JPG)](https://www.youtube.com/watch?v=48Cj63UqTfQ)
 
 ## Workflow files
 
