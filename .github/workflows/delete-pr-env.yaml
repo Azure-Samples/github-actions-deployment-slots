@@ -1,0 +1,39 @@
+
+name: Delete PR env when PR is closed
+
+on:
+  pull_request:
+    types: [closed]
+
+concurrency: 
+  group: ci-${{ github.event.number }}
+  cancel-in-progress: true
+
+env:
+  WEBAPP_NAME: tomcat-app
+  RESOURCE_GROUP: freeberg-tomcat-slots-demo
+  SLOT_NAME: pr-${{ github.event.number }}
+
+jobs:
+  delete-slot:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Log into Azure CLI with service principal
+      uses: azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - name: Delete slot on staging site
+      run: az webapp deployment slot delete --resource-group $RESOURCE_GROUP  --name $WEBAPP_NAME --slot $SLOT_NAME
+
+  delete-deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Delete Deployment Environment
+        uses: strumwolf/delete-deployment-environment@v2.0.1
+        with:
+          environment: "PR #${{ github.event.number }}"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          onlyRemoveDeployments: true
